@@ -16,19 +16,35 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
 // ROUTES
+app.get("/", (req, res) => {
+    res.redirect("/logs")
+});
+
 //I
+app.get("/logs", (req, res) => {
+    res.render("index.ejs")
+});
 
 //N
+app.get("/logs/new", (req, res) => {
+    res.render("new.ejs")
+});
 
 //D
 
 //U
 
 //C
+app.post("/logs", (req, res) => {
+    res.send("WE POSTIN")
+});
 
 //E
 
 //S
+app.get("/logs/:id", (req, res) => {
+    res.render("show.ejs")
+});
 
 // Database Connection Error/Success
 // Define callback functions for various events
