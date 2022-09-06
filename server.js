@@ -56,7 +56,11 @@ app.post("/logs", (req, res) => {
 
 //S
 app.get("/logs/:id", (req, res) => {
-    res.render("show.ejs");
+    Log.findById(req.params.id, (err, foundLog) => {
+        res.render("show.ejs", {
+            log: foundLog,
+        });
+    })
 });
 
 // Database Connection Error/Success
