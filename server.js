@@ -1,4 +1,5 @@
 const express = require("express");
+const { redirect } = require("express/lib/response");
 const methodOverride = require("method-override");
 const app = express();
 require("dotenv").config();
@@ -23,7 +24,11 @@ app.get("/", (req, res) => {
 
 //I
 app.get("/logs", (req, res) => {
-    res.render("index.ejs");
+    Log.find({}, (err, allLogs) => {
+        res.render("index.ejs", {
+            logs: allLogs,
+        });
+    });
 });
 
 //N
@@ -37,7 +42,14 @@ app.get("/logs/new", (req, res) => {
 
 //C
 app.post("/logs", (req, res) => {
-    res.send(req.body);
+    if (req.body.shipIsBroken === "on") {
+        req.body.shipIsBroken = true;
+    } else {
+        req.body.shipIsBroken = false;
+    }
+    Log.create(req.body, (err, createdLog) => {
+        res.redirect("/logs");
+    });
 });
 
 //E
