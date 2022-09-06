@@ -4,6 +4,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT;
 const mongoose = require("mongoose");
+const Log = require("./models/log.js");
 
 // Database Connection
 mongoose.connect(process.env.DATABASE_URL, {
@@ -17,17 +18,17 @@ app.use(methodOverride("_method"));
 
 // ROUTES
 app.get("/", (req, res) => {
-    res.redirect("/logs")
+    res.redirect("/logs");
 });
 
 //I
 app.get("/logs", (req, res) => {
-    res.render("index.ejs")
+    res.render("index.ejs");
 });
 
 //N
 app.get("/logs/new", (req, res) => {
-    res.render("new.ejs")
+    res.render("new.ejs");
 });
 
 //D
@@ -36,14 +37,14 @@ app.get("/logs/new", (req, res) => {
 
 //C
 app.post("/logs", (req, res) => {
-    res.send("WE POSTIN")
+    res.send(req.body);
 });
 
 //E
 
 //S
 app.get("/logs/:id", (req, res) => {
-    res.render("show.ejs")
+    res.render("show.ejs");
 });
 
 // Database Connection Error/Success
