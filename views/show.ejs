@@ -7,8 +7,15 @@
     <title>Captain's Log</title>
 </head>
 <body>
+    <nav>
+        <a href="/logs">Back to Logs</a>
+    </nav>
     <h1><%=log.title%></h1>
-    <p><%=log.timestamp%></p>
     <p><%=log.entry%></p>
+    <% if(log.shipIsBroken) { %>
+        <p>THE SHIP IS BROKEN!</p>
+    <% } else { %>
+        <p>The ship is afloat!</p>
+    <% } %>
 </body>
 </html>
