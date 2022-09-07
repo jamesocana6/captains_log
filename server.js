@@ -37,8 +37,26 @@ app.get("/logs/new", (req, res) => {
 });
 
 //D
+app.delete("/logs/:id", (req, res) => {
+    Log.findByIdAndDelete(req.params.id, (err, deletedLog) => {
+        res.redirect("/logs");
+    });
+});
 
 //U
+app.put("/logs/:id", (req, res) => {
+    if (req.body.shipIsBroken === "on") {
+        req.body.shipIsBroken = true;
+    } else {
+        req.body.shipIsBroken = false;
+    }
+    Log.findByIdAndUpdate(req.params.id, req.body, 
+    {
+        new: true,
+    }, (err, foundLog) => {
+        res.redirect(`/logs/${req.params.id}`)
+    });
+});
 
 //C
 app.post("/logs", (req, res) => {
@@ -53,6 +71,12 @@ app.post("/logs", (req, res) => {
 });
 
 //E
+app.get("/logs/:id/edit", (req, res) => {
+    Log.findById(req.params.id, (err, foundLog) => {
+        res.render("edit.ejs", {
+            log: foundLog,
+        });
+    })});
 
 //S
 app.get("/logs/:id", (req, res) => {

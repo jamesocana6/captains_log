@@ -10,7 +10,13 @@
     <h1>All Logs</h1>
     <ul>
         <% logs.forEach(log => { %>
-            <a href="/logs/<%=log._id%>"><li><%=log.title%></li></a>
+            <li>
+                <a href="/logs/<%=log._id%>"><%=log.title%></a>
+                <a href="/logs/<%=log._id%>/edit">Edit</a>
+                <form style="display: inline; margin-left: 10px;" action="/logs/<%=log._id%>?_method=DELETE" method="POST">
+                    <button>DELETE</button>
+                </form>
+            </li>
         <% }) %>
     </ul>
     <nav>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Captain's Log</title>
+</head>
+<body>
+    <h1>Edit Log</h1>
+    <form action="/logs/<%=log._id%>?_method=PUT" method="POST">
+        Title: <input type="text" name="title" value="<%=log.title%>"><br>
+        Entry: <input type="text" name="entry" value="<%=log.entry%>"><br>
+        Ship Is Broken?: <input type="checkbox" name="shipIsBroken" 
+            <%if (log.shipIsBroken === true) { %> checked="on" <% } %>><br>
+        <input type="submit" name="Add Log">
+    </form>
+</body>
+</html>
